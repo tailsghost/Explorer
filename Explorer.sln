@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AvaloniaUI", "AvaloniaUI", "{D5C6F7BA-4DE6-4227-96AA-C683D5F9CC9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9D88EE81-921E-4D1B-A9F1-B9C1CCFA5939}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{EC443CBC-2B09-4AA1-BC5B-F9F25C413F73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Explorer.WPF.UI", "WPF\Explorer.WPF.UI\Explorer.WPF.UI.csproj", "{CA652840-EE43-48B3-B644-AB4B36E3C8D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA652840-EE43-48B3-B644-AB4B36E3C8D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA652840-EE43-48B3-B644-AB4B36E3C8D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA652840-EE43-48B3-B644-AB4B36E3C8D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA652840-EE43-48B3-B644-AB4B36E3C8D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CA652840-EE43-48B3-B644-AB4B36E3C8D9} = {EC443CBC-2B09-4AA1-BC5B-F9F25C413F73}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E4F588C-31DF-49D9-8E51-EA760DDC8428}
+	EndGlobalSection
+EndGlobal
