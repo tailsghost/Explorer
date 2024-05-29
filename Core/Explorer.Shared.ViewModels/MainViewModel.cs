@@ -42,6 +42,15 @@ public partial class MainViewModel : BaseViewModel
 
     #endregion
 
+    #region Public Methods
+
+    public void ApplicationClising()
+    {
+        
+    }
+
+    #endregion
+
     #region Private Methods
 
     private void AddTabItemViewModel()
