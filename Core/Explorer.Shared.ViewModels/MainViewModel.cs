@@ -2,6 +2,7 @@
 using Explorer.Shared.ViewModels.Commands;
 using Explorer.Shared.ViewModels.Core;
 
+
 namespace Explorer.Shared.ViewModels;
 
 public partial class MainViewModel : BaseViewModel
@@ -19,6 +20,8 @@ public partial class MainViewModel : BaseViewModel
 
     public DelegateCommand AddTabItemCommand {  get; }
 
+    public DelegateCommand CloseCommand { get; }
+
     #endregion
 
     #region Constructor
@@ -27,7 +30,8 @@ public partial class MainViewModel : BaseViewModel
 
         AddTabItemCommand = new DelegateCommand(OnAddTabItem);
 
-        AddTabItemViewModel();
+        CloseCommand = new DelegateCommand(OnClose);
+
         AddTabItemViewModel();
     }
 
@@ -57,11 +61,17 @@ public partial class MainViewModel : BaseViewModel
     {
         var vm = new DirectoryTabItemViewModel();
 
-        vm.Closed += Vm_Closed;
-
         DirectoryTabItems.Add(vm);
 
         CurrentDirectoryTabItem = vm;
+    }
+
+    private void OnClose(object obj)
+    {
+        if (obj is DirectoryTabItemViewModel directoryTabItemViewModel)
+        {
+            CloseTab(directoryTabItemViewModel);
+        }
     }
 
     private void Vm_Closed(object sender, EventArgs e)
@@ -74,7 +84,6 @@ public partial class MainViewModel : BaseViewModel
 
     private void CloseTab(DirectoryTabItemViewModel directoryTabItemViewModel)
     {
-        directoryTabItemViewModel.Closed -= Vm_Closed;
 
         DirectoryTabItems.Remove(directoryTabItemViewModel);
 

@@ -18,104 +18,144 @@
 		
 		Icon="/Assets/avalonia-logo.ico"
 		
+		x:Name="Window"
+		
 		SystemDecorations="None"
 		
         >
 
+	<Design.DataContext>
+		<vm1:MainViewModel/>
+	</Design.DataContext>
+
 	<Window.Resources>
-			<ControlTheme x:Key="{x:Type Window}" TargetType="Window">
-				<Setter Property="Template">
-					<ControlTemplate>
-						<Border Background="Black">
-							<Grid>
-								
-								<Grid.RowDefinitions>
-									<!--Title Bar-->
-									<RowDefinition Height="40"/>
-									<!--BookMarks-->
-									<RowDefinition Height="37"/>
-									<!--TabItemContent-->
-									<RowDefinition Height="*"/>
-								</Grid.RowDefinitions>
+		<ControlTheme x:Key="{x:Type Window}" TargetType="Window">
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Border Background="Black">
+						<Grid>
 
+							<Grid.RowDefinitions>
 								<!--Title Bar-->
-								<Grid>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="Auto"/>
-										<ColumnDefinition Width="Auto"/>
-										<ColumnDefinition Width="*"/>
-										<ColumnDefinition Width="Auto"/>
-									</Grid.ColumnDefinitions>
+								<RowDefinition Height="40"/>
+								<!--Search TextBox-->
+								<RowDefinition Height="40"/>
+								<!--BookMarks-->
+								<RowDefinition Height="37"/>
+								<!--TabItemContent-->
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
 
-									<ListBox ItemsSource="{Binding DirectoryTabItems}"
-											 SelectedItem="{Binding CurrentDirectoryTabItem}" >
-										<ListBox.ItemsPanel>
-											<ItemsPanelTemplate>
-												<StackPanel Orientation="Horizontal"/>
-											</ItemsPanelTemplate>
-										</ListBox.ItemsPanel>
-										<ListBox.ItemTemplate>
-											<DataTemplate>
-												<StackPanel Orientation="Horizontal">
-													<TextBlock Text="{Binding Name}"></TextBlock>
-													<Button Command="{Binding CloseCommand}"
-															Width="{Binding $self.Bounds.Height}">X</Button>
-												</StackPanel>
-											</DataTemplate>
-										</ListBox.ItemTemplate>
-									</ListBox>
+							<!--Title Bar-->
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+								</Grid.ColumnDefinitions>
 
-									<Button Grid.Column="1" Margin="2"
-											Command="{Binding AddTabItemCommand}"
-											Width="{Binding $self.Bounds.Height}"
-											Content="+"/>
-
-									<StackPanel Grid.Column="2"
-                                                HorizontalAlignment="Right"
-                                                VerticalAlignment="Top"
-                                                Orientation="Horizontal">
-										<Button Width="46"
-                                                Height="30"
-												HorizontalContentAlignment="Center"
-												Click="CollapseButton_OnClick"
-												>_</Button>
-										<Button Width="44"
-                                                Height="30"
-												HorizontalContentAlignment="Center"
-											Click="ExpandButton_OnClick"
-                                                >P</Button>
-										<Button Width="44"
-                                                Height="30"
-												HorizontalContentAlignment="Center"
-												Click="CloseButton_OnClick"
-                                                >X</Button>
-									</StackPanel>
-								</Grid>
-
-								<StackPanel Grid.Row="1"
-                                            Background="#FF353535">
-									<Menu>
-										<MenuItem Header="Games">
-
-										</MenuItem>
-									</Menu>
-								</StackPanel>
-
-
-
-								<ContentControl Grid.Row="2"
-												Content="{Binding CurrentDirectoryTabItem}">
-									<ContentControl.ContentTemplate>
+								<ListBox ItemsSource="{Binding DirectoryTabItems}"
+										 SelectedItem="{Binding CurrentDirectoryTabItem}" >
+									<ListBox.ItemsPanel>
+										<ItemsPanelTemplate>
+											<StackPanel Orientation="Horizontal"/>
+										</ItemsPanelTemplate>
+									</ListBox.ItemsPanel>
+									<ListBox.ItemTemplate>
 										<DataTemplate>
-											<ui:DirectoryTabItem/>
+											<StackPanel Orientation="Horizontal">
+												<TextBlock Text="{Binding Name}"></TextBlock>
+												<Button Command="{ReflectionBinding DataContext.CloseCommand}"
+                                                            Content="X"
+                                                            CommandParameter="{Binding}"/>
+											</StackPanel>
 										</DataTemplate>
-									</ContentControl.ContentTemplate>
-								</ContentControl>
+									</ListBox.ItemTemplate>
+								</ListBox>
+
+								<Button Grid.Column="1" Margin="2"
+										Command="{Binding AddTabItemCommand}"
+										Width="{Binding $self.Bounds.Height}"
+										Content="+"/>
+
+								<StackPanel Grid.Column="2"
+											HorizontalAlignment="Right"
+											VerticalAlignment="Top"
+											Orientation="Horizontal">
+									<Button Width="46"
+											Height="30"
+											HorizontalContentAlignment="Center"
+											Click="CollapseButton_OnClick"
+												>_</Button>
+									<Button Width="44"
+											Height="30"
+											HorizontalContentAlignment="Center"
+										Click="ExpandButton_OnClick"
+                                                >P</Button>
+									<Button Width="44"
+											Height="30"
+											HorizontalContentAlignment="Center"
+											Click="CloseButton_OnClick"
+                                                >X</Button>
+								</StackPanel>
 							</Grid>
-						</Border>
-					</ControlTemplate>
-				</Setter>
-			</ControlTheme>
+
+							<Grid Grid.Row="1">
+
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+
+								<Button Content="&lt;-"
+										Margin="2"
+                                            
+										Width="{Binding $self.Bounds.Height}"
+										Command="{Binding CurrentDirectoryTabItem.MoveBackCommand}"/>
+								<Button Content="-&gt;"
+										Grid.Column="1"
+											Margin="2"
+										Width="{Binding $self.Bounds.Height}"
+										Command="{Binding CurrentDirectoryTabItem.MoveForwardCommand}"/>
+								<Button Content="0"
+										Grid.Column="2"
+										Margin="2"
+										Width="{Binding $self.Bounds.Height}"/>
+								<TextBox Text="{Binding CurrentDirectoryTabItem.FilePath}"
+										 VerticalAlignment="Center"
+										 FontSize="16"
+										 Grid.Column="3"
+										 Margin="2"
+                                             />
+							</Grid>
+
+							<StackPanel Grid.Row="2"
+										Background="#FF353535">
+								<Menu>
+									<MenuItem Header="Games">
+
+									</MenuItem>
+								</Menu>
+							</StackPanel>
+
+
+
+							<ContentControl Grid.Row="3"
+											Content="{Binding CurrentDirectoryTabItem}">
+								<ContentControl.ContentTemplate>
+									<DataTemplate>
+										<ui:DirectoryTabItem/>
+									</DataTemplate>
+								</ContentControl.ContentTemplate>
+							</ContentControl>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter>
+		</ControlTheme>
 	</Window.Resources>
 
 </Window>

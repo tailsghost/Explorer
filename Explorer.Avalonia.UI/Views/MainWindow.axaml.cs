@@ -2,11 +2,12 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
+using Avalonia.ReactiveUI;
 using Explorer.Shared.ViewModels;
 
 namespace Explorer.Avalonia.UI.Views
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : ReactiveWindow<MainViewModel>
     {
         private MainViewModel mainViewModel;
 

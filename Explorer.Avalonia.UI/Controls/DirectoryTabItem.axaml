@@ -19,9 +19,6 @@
 			<RowDefinition/>
 		</Grid.RowDefinitions>
 
-
-		<TextBox x:DataType="vm:DirectoryTabItemViewModel" Text="{Binding FilePath}"/>
-
 		<ListBox Grid.Row="1"
 				 x:DataType="vm:DirectoryTabItemViewModel"
 				 ItemsSource="{Binding DirectoriesAndFiles}"
