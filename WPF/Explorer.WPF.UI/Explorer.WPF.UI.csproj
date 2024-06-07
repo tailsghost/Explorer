@@ -9,11 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\folder_background.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Explorer.Shared.ViewModels\Explorer.Shared.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\folder_background.jpg" />
   </ItemGroup>
 
 </Project>

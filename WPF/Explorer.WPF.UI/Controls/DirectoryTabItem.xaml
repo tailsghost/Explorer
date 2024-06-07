@@ -5,8 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Explorer.WPF.UI.Controls"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:con="clr-namespace:Explorer.WPF.UI.ValueConverters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+
+    <UserControl.Resources>
+        <con:FileEntityToImageConverters x:Key="ToImageConverter"></con:FileEntityToImageConverters>
+    </UserControl.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -14,10 +21,88 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-                
+
         <ListBox Grid.Row="1" 
-ItemsSource="{Binding DirectoriesAndFiles}"
-SelectedItem="{Binding SelectedFileEntity}">
+                    ItemsSource="{Binding DirectoriesAndFiles}"
+                    SelectedItem="{Binding SelectedFileEntity}"
+                 Background="Transparent"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 HorizontalContentAlignment="Center"
+                 VerticalContentAlignment="Center">
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+                    <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+                    <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Width" Value="140"></Setter>
+                    <Setter Property="Height" Value="140"></Setter>
+                    <Setter Property="Padding" Value="4"></Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+
+                                <Grid>
+
+                                    <Border x:Name="Bd"
+                                            CornerRadius="7"
+                                            Margin="10"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}" 
+                                            Padding="1" SnapsToDevicePixels="true">
+
+                                        <ContentPresenter
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+
+                                </Grid>
+
+                                <ControlTemplate.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                                    </MultiTrigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsMouseOver" Value="True"/>
+                                        </MultiTrigger.Conditions>
+
+                                        <Setter TargetName="Bd" Property="Background" Value="#55A9A9A9"></Setter>
+                                    </MultiTrigger>
+
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                            <Condition Property="Selector.IsSelected" Value="True"/>
+                                        </MultiTrigger.Conditions>
+
+                                        <Setter TargetName="Bd" Property="Background" Value="#88A9A9A9"></Setter>
+
+                                    </MultiTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
 
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
@@ -28,8 +113,19 @@ SelectedItem="{Binding SelectedFileEntity}">
             </b:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <TextBlock Text="{Binding Name}"/>
+                    <Grid Background="Transparent">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Source="{Binding ., Converter={StaticResource ToImageConverter}}"/>
+
+                        <TextBlock Grid.Row="1"
+                                   HorizontalAlignment="Center"
+                                   Foreground="White"
+                                   Text="{Binding Name}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

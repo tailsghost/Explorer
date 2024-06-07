@@ -4,6 +4,60 @@
              xmlns:local="clr-namespace:Explorer.WPF.UI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DrawingImage x:Key="FolderIconImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V32 H32 V0 H0 Z">
+                    <GeometryDrawing>
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="#FF000000" Opacity="0.2" />
+                        </GeometryDrawing.Brush>
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry RadiusX="1.25" RadiusY="1.25" Rect="3,12,25,16" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFB58F1B" Geometry="F1 M32,32z M0,0z M3,21.75C3,22.442,3.5575,23,4.25,23L26.75,23C27.442,23,28,22.442,28,21.75L28,8.25C28,7.5575,27.442,7,26.75,7L14,7 14,6.25C14,5.5575,13.443,5,12.75,5L4.25,5C3.5575,5,3,5.5575,3,6.25" />
+                    <GeometryDrawing>
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="#FF000000" Opacity="0.2" />
+                        </GeometryDrawing.Brush>
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry RadiusX="1.25" RadiusY="1.25" Rect="3,10,25,16" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFE4E4E4">
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry RadiusX="1.25" RadiusY="1.25" Rect="5,9,21,10" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFE2B322">
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry RadiusX="1.25" RadiusY="1.25" Rect="3,11,25,16" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M32,32z M0,0z M4.25,5C3.5575,5,3,5.5575,3,6.25L3,7.25C3,6.5575,3.5575,6,4.25,6L12.75,6C13.443,6,14,6.5575,14,7.25L14,8 26.75,8C27.442,8,28,8.5575,28,9.25L28,8.25C28,7.5575,27.442,7,26.75,7L14,7 14,6.25C14,5.5575,13.443,5,12.75,5L4.25,5z">
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="#FFFFFFFF" Opacity="0.1" />
+                        </GeometryDrawing.Brush>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="FileIconImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V32.000001 H32 V0 H0 Z">
+                    <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-1020.3621">
+                        <DrawingGroup Opacity="1">
+                            <GeometryDrawing Brush="#FF518FF5" Geometry="F1 M32,32.000001z M0,0z M26,1028.3621L26,1046.8621C26,1047.6931,25.331,1048.3621,24.49999,1048.3621L8.50002,1048.3621C7.66901,1048.3621,7,1047.6931,7,1046.8621L7,1024.8621C7,1024.0311,7.66901,1023.3621,8.50002,1023.3621L21,1023.3621" />
+                            <GeometryDrawing Brush="#FFA6C5FA" Geometry="F1 M32,32.000001z M0,0z M21.00003,1023.3621L21.00003,1026.8621C21.00003,1027.6931,21.66902,1028.3621,22.50003,1028.3621L26.00003,1028.3621z" />
+                            <GeometryDrawing Brush="#FFF9F9F9" Geometry="F0 M32,32.000001z M0,0z M11.007812,1033.8613A0.50005,0.50005,0,1,0,11.007812,1034.8613L17.632812,1034.8613 22,1034.8613A0.50005,0.50005,0,1,0,22,1033.8613L17.632812,1033.8613 11.007812,1033.8613z" />
+                            <GeometryDrawing Brush="#FFF9F9F9" Geometry="F0 M32,32.000001z M0,0z M11.007812,1035.8613A0.50005,0.50005,0,1,0,11.007812,1036.8613L17.632812,1036.8613 22,1036.8613A0.50005,0.50005,0,1,0,22,1035.8613L17.632812,1035.8613 11.007812,1035.8613z" />
+                            <GeometryDrawing Brush="#FFF9F9F9" Geometry="F0 M32,32.000001z M0,0z M11.007812,1039.8613A0.50005,0.50005,0,1,0,11.007812,1040.8613L15.375,1040.8613 18,1040.8613A0.50005,0.50005,0,1,0,18,1039.8613L15.375,1039.8613 11.007812,1039.8613z M20,1039.8613A0.50005,0.50005,0,1,0,20,1040.8613A0.50005,0.50005,0,1,0,20,1039.8613z" />
+                            <GeometryDrawing Brush="#FFF9F9F9" Geometry="F0 M32,32.000001z M0,0z M11.007812,1037.8613A0.50005,0.50005,0,1,0,11.007812,1038.8613L17.632812,1038.8613 22,1038.8613A0.50005,0.50005,0,1,0,22,1037.8613L17.632812,1037.8613 11.007812,1037.8613z" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
     </Application.Resources>
 </Application>

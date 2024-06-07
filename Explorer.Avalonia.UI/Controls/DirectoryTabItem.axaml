@@ -6,12 +6,12 @@
 			 x:CompileBindings="True"
 			 xmlns:vm="clr-namespace:Explorer.Shared.ViewModels;assembly=Explorer.Shared.ViewModels"
 			 x:DataType="vm:MainViewModel"
+			 xmlns:local="clr-namespace:AvaloniaSample;assembly=AvaloniaSample"
+			 xmlns:skp="clr-namespace:Avalonia.Controls.Skia;assembly=Avalonia.Controls.Skia"
 			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
 			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-		
+				xmlns:vc="clr-namespace:Explorer.Avalonia.UI.ValueConverters"
              x:Class="Explorer.Avalonia.UI.Controls.DirectoryTabItem">
-
-
 
 	<Grid>
 		<Grid.RowDefinitions>
@@ -22,7 +22,72 @@
 		<ListBox Grid.Row="1"
 				 x:DataType="vm:DirectoryTabItemViewModel"
 				 ItemsSource="{Binding DirectoriesAndFiles}"
-				 SelectedItem="{Binding SelectedFileEntity}">
+				 SelectedItem="{Binding SelectedFileEntity}"
+				 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+				 Background="Transparent"
+				 >
+
+			<ListBox.Styles>
+				<Style Selector="ListBoxItem">
+					<Setter Property="Background" Value="Transparent" />
+					<Setter Property="BorderBrush" Value="Transparent" />
+					<Setter Property="BorderThickness" Value="0" />
+					<Setter Property="Padding" Value="4" />
+					<Setter Property="HorizontalAlignment" Value="Center"/>
+					<Setter Property="Width" Value="140"></Setter>
+					<Setter Property="Height" Value="140"></Setter>
+					<Setter Property="Template">
+						<ControlTemplate>
+							<Border x:Name="Bd"
+									  CornerRadius="7"
+									  Margin="10"
+									  Background="{TemplateBinding Background}"
+									  BorderBrush="{TemplateBinding BorderBrush}"
+									  BorderThickness="{TemplateBinding BorderThickness}"
+									  Padding="1">
+
+								<ContentPresenter Name="PART_ContentPresenter"
+									HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+									Content="{TemplateBinding Content}"
+									ContentTemplate="{TemplateBinding ContentTemplate}"/>
+							</Border>
+						</ControlTemplate>
+					</Setter>
+					<Style Selector="^:pointerover /template/ ContentPresenter">
+						<Setter Property="Background" Value="#55A9A9A9" />
+					</Style>
+
+					<Style Selector="^:selected /template/ ContentPresenter">
+						<Setter Property="Background" Value="#88A9A9A9" />
+					</Style>
+
+					<Style Selector="^:selected:focus /template/ ContentPresenter">
+						<Setter Property="Background" Value="#88A9A9A9" />
+					</Style>
+
+					<Style Selector="^:selected:pointerover /template/ ContentPresenter">
+						<Setter Property="Background" Value="#88A9A9A9" />
+					</Style>
+
+					<Style Selector="^:selected:focus:pointerover /template/ ContentPresenter">
+						<Setter Property="Background" Value="#88A9A9A9" />
+					</Style>
+				</Style>
+
+
+			</ListBox.Styles>
+
+			<ListBox.Resources>
+				<vc:FileEntityToImageConverters x:Key="FileEntityResource"/>
+			</ListBox.Resources>
+
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+
 			<i:Interaction.Behaviors>
 				<ia:EventTriggerBehavior EventName="DoubleTapped">
 					<ia:InvokeCommandAction
@@ -32,13 +97,25 @@
 			</i:Interaction.Behaviors>
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<Grid>
-						<TextBlock Text="{Binding Name}"/>
+					<Grid Background="Transparent">
+
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+
+						<Svg Path="{Binding ., Converter={StaticResource FileEntityResource}}"/>
+
+						<TextBlock Grid.Row="1"
+                                   HorizontalAlignment="Center"
+                                   Foreground="White"
+                                   Text="{Binding Name}"
+								   TextWrapping="Wrap"
+								   TextAlignment="Center"/>
 					</Grid>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
-
 	</Grid>
-	
+
 </UserControl>
